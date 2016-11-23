@@ -8,12 +8,8 @@ dependencies:
     - docker build -t $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
 
 test:
-  pre:
-    - docker run --name $CIRCLE_PROJECT_REPONAME -d $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME && sleep 10
   override:
-    - which platex:
-      environment:
-        DOCKER_CONTAINER: $CIRCLE_PROJECT_REPONAME
+    - docker run --name $CIRCLE_PROJECT_REPONAME -d $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME which platex && sleep 10
 
 deployment:
   hub:
